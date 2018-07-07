@@ -7,7 +7,7 @@
 
 ## 应用架构介绍
 使用shiro进去用户登录授权验证，通过shiro-redis存储shiro维护的session；<br>
-在数据访问层使用的是mybatis，并且集成了mybatis-plus；使用plus通用的crud可以节省我们写基本增删改查的时间，提高开发效率；<br>
+在数据访问层使用的是mybatis，并且集成了mybatis-plus，使用plus通用的crud以及自定义可以节省我们开发时间，提高开发效率；<br>
 使用spring-cloud主要的作用是通过consul作为服务注册中心，对所有模块的api进行统一的治理，
 通过feign声明接口，转发请求，使各个子模块内部api可以相互调用，也使得通用的api有更直观的展示，更方便维护和管理；
 
