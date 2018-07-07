@@ -1,0 +1,116 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: itms-api-login
+  cloud:
+    consul:
+      discovery:
+        instance-id: ${spring.application.name}
+        #health-check-interval: 1800s
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  aop:
+    auto: true
+#数据源
+  data-source:
+    druid:
+      filters: mergeStat,wall,logback
+      initial-size: 5
+      max-active: 50
+      min-idle: 5
+      max-wait: 6000
+      validation-query: SELECT 'x'
+      test-on-borrow: true
+      test-on-return: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+      log-abandoned: true
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: admin
+        login-password: 123456
+       #数据源1 业务数据
+      datasource1:
+        url: jdbc:oracle:thin:@192.168.0.240:1521:orcl
+        username: odin_itms_new
+        password: odin_itms_new
+        driverClassName: oracle.jdbc.OracleDriver
+      #shiro数据源，用于权限相关
+      shiro-data-source:
+        #MyISAM和InnoDB是两种最常用的数据库引擎，默认的引擎是MyISAM，性能最好，但不支持事务处理，只有InnoDB支持事务
+        #url: jdbc:oracle:thin:@192.168.0.240:1521:orcl
+        #username: odin_itms_new
+        #password: odin_itms_new
+        url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+        username: zhz
+        password: zhz
+        driverClassName: oracle.jdbc.OracleDriver
+#redis配置
+redis:
+  shiro:
+    #host: 192.168.0.201
+    host: 192.168.2.100
+    port: 6379
+    timeout: 0
+    password:
+
+#mybatis-plus配置
+globalConfig1:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+  idType: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+  fieldStrategy: 2
+    #驼峰下划线转换
+  dbColumnUnderline: true
+    #刷新mapper 调试神器
+  refreshMapper: true
+
+global-config-shrio:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+  idType: 3
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+  fieldStrategy: 2
+    #驼峰下划线转换
+  dbColumnUnderline: true
+    #刷新mapper 调试神器
+  refreshMapper: true
+
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis-config.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.bosi.itms.shiro.entity
+  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  configuration:
+      map-underscore-to-camel-case: true
+
+#shiro
+shiro:
+  session:
+    timeout: 60 #session超时时间，单位秒
+  online:
+    max: 2 #同一帐号可同时在线人数
+
+#打印mybatis日志
+logging:
+  level:
+    com:
+      bosi:
+        itms: debug
+
+#consul接口提供者名字
+provider: other-try
+

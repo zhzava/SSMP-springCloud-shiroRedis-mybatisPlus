@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosi.itms.shiro.dao.InfoFrmDao" >
+  <resultMap id="BaseResultMap" type="com.bosi.itms.shiro.entity.InfoFrm" >
+    <result column="FRM_ID" property="frmId" jdbcType="VARCHAR" />
+    <result column="FRM_NAME" property="frmName" jdbcType="VARCHAR" />
+    <result column="FRM_PID" property="frmPid" jdbcType="VARCHAR" />
+    <result column="ICON_PATH" property="iconPath" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="SHOW_INDEX" property="showIndex" jdbcType="DECIMAL" />
+    <result column="IS_ENABLED" property="isEnabled" jdbcType="CHAR" />
+    <result column="IS_LEVEL3" property="isLevel3" jdbcType="CHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="APP_CODE" property="appCode" jdbcType="CHAR" />
+    <result column="OPEN_MODE" property="openMode" jdbcType="CHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectPermByUser" parameterType="com.bosi.itms.shiro.entity.InfoUser" resultMap="BaseResultMap">
+    SELECT
+    sp.*
+    FROM
+    t_info_role_frm srp
+    LEFT JOIN t_info_frm sp ON srp.frm_id = sp.frm_id
+    WHERE
+    srp.role_id IN (
+    SELECT
+    sur.role_id
+    FROM
+    t_info_user_role sur
+    LEFT JOIN t_info_role sr ON sur.role_id = sr.role_id
+    WHERE
+    sur.user_id = #{userId} AND sp.frm_id IS NOT NULL
+    )
+  </select>
+  <insert id="insert" parameterType="com.bosi.itms.shiro.entity.InfoFrm" >
+    insert into T_INFO_FRM (FRM_ID, FRM_NAME, FRM_PID, 
+      ICON_PATH, URL, SHOW_INDEX, 
+      IS_ENABLED, IS_LEVEL3, DESCRIPTION, 
+      APP_CODE, OPEN_MODE, REMARKS
+      )
+    values (#{frmId,jdbcType=VARCHAR}, #{frmName,jdbcType=VARCHAR}, #{frmPid,jdbcType=VARCHAR}, 
+      #{iconPath,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{showIndex,jdbcType=DECIMAL}, 
+      #{isEnabled,jdbcType=CHAR}, #{isLevel3,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, 
+      #{appCode,jdbcType=CHAR}, #{openMode,jdbcType=CHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bosi.itms.shiro.entity.InfoFrm" >
+    insert into T_INFO_FRM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="frmId != null" >
+        FRM_ID,
+      </if>
+      <if test="frmName != null" >
+        FRM_NAME,
+      </if>
+      <if test="frmPid != null" >
+        FRM_PID,
+      </if>
+      <if test="iconPath != null" >
+        ICON_PATH,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="showIndex != null" >
+        SHOW_INDEX,
+      </if>
+      <if test="isEnabled != null" >
+        IS_ENABLED,
+      </if>
+      <if test="isLevel3 != null" >
+        IS_LEVEL3,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="appCode != null" >
+        APP_CODE,
+      </if>
+      <if test="openMode != null" >
+        OPEN_MODE,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="frmId != null" >
+        #{frmId,jdbcType=VARCHAR},
+      </if>
+      <if test="frmName != null" >
+        #{frmName,jdbcType=VARCHAR},
+      </if>
+      <if test="frmPid != null" >
+        #{frmPid,jdbcType=VARCHAR},
+      </if>
+      <if test="iconPath != null" >
+        #{iconPath,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="showIndex != null" >
+        #{showIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=CHAR},
+      </if>
+      <if test="isLevel3 != null" >
+        #{isLevel3,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="appCode != null" >
+        #{appCode,jdbcType=CHAR},
+      </if>
+      <if test="openMode != null" >
+        #{openMode,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

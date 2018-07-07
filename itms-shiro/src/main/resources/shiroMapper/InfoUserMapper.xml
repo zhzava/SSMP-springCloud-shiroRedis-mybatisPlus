@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bosi.itms.shiro.dao.InfoUserDao" >
+  <resultMap id="BaseResultMap" type="com.bosi.itms.shiro.entity.InfoUser" >
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="VALID_DATE" property="validDate" jdbcType="DATE" />
+    <result column="IS_ENABLED" property="isEnabled" jdbcType="CHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="VARCHAR" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+    <result column="POLICE_CODE" property="policeCode" jdbcType="VARCHAR" />
+    <result column="DIVISION_CODE" property="divisionCode" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectOne">
+
+  </select>
+  <insert id="insert" parameterType="com.bosi.itms.shiro.entity.InfoUser" >
+    insert into T_INFO_USER (USER_ID, USER_NAME, USER_PWD, 
+      DEPT_CODE, VALID_DATE, IS_ENABLED, 
+      REMARKS, IS_DELETED, CREATE_TIME, 
+      CREATOR, POLICE_CODE, DIVISION_CODE, 
+      USER_TYPE)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, 
+      #{deptCode,jdbcType=VARCHAR}, #{validDate,jdbcType=DATE}, #{isEnabled,jdbcType=CHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{createTime,jdbcType=DATE}, 
+      #{creator,jdbcType=VARCHAR}, #{policeCode,jdbcType=VARCHAR}, #{divisionCode,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bosi.itms.shiro.entity.InfoUser" >
+    insert into T_INFO_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD,
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE,
+      </if>
+      <if test="validDate != null" >
+        VALID_DATE,
+      </if>
+      <if test="isEnabled != null" >
+        IS_ENABLED,
+      </if>
+      <if test="remarks != null" >
+        REMARKS,
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="policeCode != null" >
+        POLICE_CODE,
+      </if>
+      <if test="divisionCode != null" >
+        DIVISION_CODE,
+      </if>
+      <if test="userType != null" >
+        USER_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="validDate != null" >
+        #{validDate,jdbcType=DATE},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=CHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="policeCode != null" >
+        #{policeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="divisionCode != null" >
+        #{divisionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
